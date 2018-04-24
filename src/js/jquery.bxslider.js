@@ -24,7 +24,7 @@
     startSlide: 0,
     randomStart: false,
     captions: false,
-	captionsAttr: 'title',
+  captionsAttr: 'title',
     ticker: false,
     tickerHover: false,
     adaptiveHeight: false,
@@ -1126,10 +1126,8 @@
         slider.touch.start.y = touchPoints[0].pageY;
 
         if (slider.viewport.get(0).setPointerCapture) {
-		slider.pointerId = orig.pointerId;
-		if (slider.pointerId === 1) {
-			slider.viewport.get(0).setPointerCapture(slider.pointerId);
-		}
+          slider.pointerId = orig.pointerId;
+          slider.viewport.get(0).setPointerCapture(slider.pointerId);
         }
         // bind a "touchmove" event to the viewport
         slider.viewport.on('touchmove MSPointerMove pointermove', onTouchMove);
@@ -1359,7 +1357,8 @@
       lastChild = null,
       lastShowingIndex, eq, value, requestEl;
       // if plugin is currently in motion, ignore request
-      if (slider.working || slider.active.index === slider.oldIndex) { return; }
+      // if (slider.working || slider.active.index === slider.oldIndex) { return; }
+      if (slider.working) { return; }
 
       // store the old index
       slider.oldIndex = slider.active.index;
@@ -1498,8 +1497,8 @@
           el.goToPrevSlide();
         }
       }, slider.settings.pause);
-	  // onAutoChange callback
-	  slider.settings.onAutoChange.call(el, true);
+    // onAutoChange callback
+    slider.settings.onAutoChange.call(el, true);
       // if auto controls are displayed and preventControlUpdate is not true
       if (slider.settings.autoControls && preventControlUpdate !== true) { updateAutoControls('stop'); }
     };
@@ -1516,8 +1515,8 @@
       // clear the interval
       clearInterval(slider.interval);
       slider.interval = null;
-	  // onAutoChange callback
-	  slider.settings.onAutoChange.call(el, false);	  
+    // onAutoChange callback
+    slider.settings.onAutoChange.call(el, false);   
       // if auto controls are displayed and preventControlUpdate is not true
       if (slider.settings.autoControls && preventControlUpdate !== true) { updateAutoControls('start'); }
     };
@@ -1616,7 +1615,7 @@
       if (slider.pagerEl && slider.settings.controls && !slider.settings.pagerCustom) { slider.pagerEl.remove(); }
       if (slider.pagerEl && slider.settings.controls && slider.settings.pagerCustom) { slider.pagerEl.off('click touchend', 'a', clickPagerBind); }
       if (slider.pagerEl) { slider.pagerEl.find('.active').removeClass('active'); }
-	  $('.bx-caption', this).remove();
+    $('.bx-caption', this).remove();
       if (slider.controls.autoEl) { slider.controls.autoEl.remove(); }
       clearInterval(slider.interval);
       if (slider.settings.responsive) { $(window).off('resize', resizeWindow); }
